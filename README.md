@@ -98,9 +98,7 @@ Key parameters to adjust at the top of the dataset-generation cell:
 - `n_particles`, `n_iterations`, `n_restarts` — shared optimizer budget
 
 
-## Key Results
-
-## Case: mc=5, N=25
+## Key Results (Case: mc=5, N=25)
 
 At memory complexity 5 with 25 training trajectories, all methods substantially improve
 over the more data-starved mc=5, N=20 setting, and correct policy recovery becomes
