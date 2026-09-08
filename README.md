@@ -93,3 +93,6 @@ Key parameters to adjust at the top of the dataset-generation cell:
 - `n_data` — training set size (episodes)
 - `n_particles`, `n_iterations`, `n_restarts` — shared optimizer budget
 
+## Visualizations
+
+[https://canva.link/ntyixpf0yixi82t](https://canva.link/ri79lyqszonnfqt)
