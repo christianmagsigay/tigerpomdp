@@ -33,7 +33,7 @@ with local refinement helps.
 **Does near-zero training NLL imply the learned FSC recovered the correct
 policy?**
 
-Low negative log-likelihood on the training set is not sufficient evidence
+Low negative log-likelihood (NLL) on the training set is not sufficient evidence
 that a method learned the true underlying policy. This project directly tests
 policy recovery by replaying each learned model's greedy actions against the
 ground-truth Bayesian agent's trajectories, and separately checks
@@ -100,7 +100,7 @@ Key parameters to adjust at the top of the dataset-generation cell:
 
 ## Key Results
 
-# Case: mc=5, N=25
+## Case: mc=5, N=25
 
 At memory complexity 5 with 25 training trajectories, all methods substantially improve
 over the more data-starved mc=5, N=20 setting, and correct policy recovery becomes
@@ -110,25 +110,23 @@ achievable — but the path there is uneven.
 
 ![Policy Graph](hybrid_mc5_n25_policytest.png)
 
-MAPSO reaches NLL = 2.2×10⁻², EM reaches a near-machine-precision 4.6×10⁻¹³, and both
-now recover the correct Bayesian-optimal structure, unlike at N=20 where both had
-converged to structurally wrong graphs despite similarly low NLLs. Cold-start SGD still
-fails, producing extraneous long-range transition edges (NLL = 2.2×10⁻¹), consistent with
-its near-zero reliability at mc≥2 across the board.
+Figure 1: Performance of hybrid optimization and policy alignment. Final Negative Log-Likelihood
+(NLL) as a function of the number of MAPSO iterations before handoff to a local optimizer. Handoff
+iterations were geometrically sampled, with greater density early in optimization. Each point represents a
+warm-start trial in which MAPSO (blue circles) initialized either Expectation-Maximization (EM, orange
+squares) or Stochastic Gradient Descent (SGD, green triangles). Filled markers indicate convergence to
+the optimal Bayesian policy; open markers indicate a policy mismatch. Markers are slightly offset along
+the x-axis (MAPSO: left, EM: center, SGD: right) for clarity.
 
-## Restart reliability
 
-![Restart](NLL_mc5_n25.png)
+MAPSO reaches NLL = 2.2×10⁻² and EM reaches a near-machine-precision 4.6×10⁻¹³. Despite MAPSO reaching near-zero NLL, it was not able to recover the Bayesian-optimal policy, only EM. Cold-start SGD fails consistent with its near-zero reliability at mc≥2 across the board.
 
-MAPSO's best-of-50 NLL is 2.20×10⁻² and it now recovers the optimal policy at least some
-of the time, though its full-restart reliability from Fig. 5.6 remains at 0.00 for both
-N=20 and N=25 — the correct basin exists and is reachable via the single best restart,
-but it's still a minority outcome. MAPSO→SGD is essentially fully reliable here
-(NLL = 1.01×10⁻⁵), while MAPSO→EM (4.1×10⁻¹³) also succeeds.
 
 ## Hybrid handoff behavior
 
 ![Policy Test](hybrid_mc5_n25_policytest.png)
+Figure 2: Comparison of optimization methods for mc = 5, N=25. Each panel shows the learned policy of each algorithm and the corresponding optimal Bayesian policy (ground truth).
+
 
 This is where the "lucky" improvements over plain MAPSO show up most clearly. The
 MAPSO→EM and MAPSO→SGD traces show that handing off to a local optimizer *before*
@@ -146,14 +144,13 @@ N=25, and the hybrid pipeline is a direct beneficiary of that narrowing, convert
 occasional "lucky" MAPSO trajectories into reliable, correct-policy handoff points more
 often than at lower N.
 
-## Takeaway
 
-N=25 sits past the worst of the mc=5 data-starvation regime identified at N=20 (where
-every method, including EM at NLL=1.4×10⁻¹¹, failed to recover the true policy). It
-isn't yet fully resolved from cold starts alone — full-restart reliability for MAPSO and
-EM only fully stabilizes by N=30 — but hybrid MAPSO→local handoff already closes most of
-the gap, underscoring the paper's central claim: the benefit of hybridization is less
-about early-handoff synergy and more about exploiting whatever fraction of runs happen to
-have already crossed into the correct basin, then letting local optimization finish the
-job far faster (and here, more reliably) than running MAPSO to full convergence alone.
 
+## Restart reliability
+
+![Restart](reliability_heatmap.png)
+Figure 3: Reliability of MAPSO, EM, and SGD in recovering the Bayesian-optimal policy. Values
+denote the fraction of 50 restarts that converged to the optimal policy.
+
+
+MAPSO is reliable for \(m_c \leq 3\) (\(\geq 0.80\)) but drops sharply at \(m_c \geq 4\), reaching 0.00 at \(m_c=5\) for \(N_{\text{train}}\in\{20,25\}\). SGD drops from 0.68 at \(m_c=1\) to 0.00 for all \(m_c\geq2\). EM declines from 0.90 at \(m_c=1\) to 0.00 at \(m_c=5,\ N_{\text{train}}=20\), but recovers to 0.74 at \(m_c=6,\ N_{\text{train}}=50\) with a warm start, suggesting EM benefits strongly from good initialization.
