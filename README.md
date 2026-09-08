@@ -108,7 +108,7 @@ achievable — but the path there is uneven.
 
 ## Policy graphs
 
-![Policy Graph](hybrid_mc5_n25_policytest.png)
+![Policy Graph](policy_graph_mc5_n25.png)
 
 Figure 1: Performance of hybrid optimization and policy alignment. Final Negative Log-Likelihood
 (NLL) as a function of the number of MAPSO iterations before handoff to a local optimizer. Handoff
@@ -137,12 +137,7 @@ at N=20, where the same trace oscillated erratically between success and failure
 In effect, a partially-converged MAPSO trajectory that hasn't yet locked onto the correct
 macro-basin is sometimes rescued by EM or SGD's rapid local convergence, snapping to the
 true optimum from an intermediate MAPSO state that, left to run alone, might have drifted
-into (or stayed in) a suboptimal basin. This mirrors the paper's broader point about
-mc=5, N=25 (Fig. 5.1d): the restart-to-restart instability seen at N=20 — where training/
-validation NLL distributions spanned orders of magnitude — narrows substantially at
-N=25, and the hybrid pipeline is a direct beneficiary of that narrowing, converting
-occasional "lucky" MAPSO trajectories into reliable, correct-policy handoff points more
-often than at lower N.
+into (or stayed in) a suboptimal basin.
 
 
 
