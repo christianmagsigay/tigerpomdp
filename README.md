@@ -146,5 +146,8 @@ into (or stayed in) a suboptimal basin.
 Figure 3: Reliability of MAPSO, EM, and SGD in recovering the Bayesian-optimal policy. Values
 denote the fraction of 50 restarts that converged to the optimal policy.
 
-
-MAPSO is reliable for \(m_c \leq 3\) (\(\geq 0.80\)) but drops sharply at \(m_c \geq 4\), reaching 0.00 at \(m_c=5\) for \(N_{\text{train}}\in\{20,25\}\). SGD drops from 0.68 at \(m_c=1\) to 0.00 for all \(m_c\geq2\). EM declines from 0.90 at \(m_c=1\) to 0.00 at \(m_c=5,\ N_{\text{train}}=20\), but recovers to 0.74 at \(m_c=6,\ N_{\text{train}}=50\) with a warm start, suggesting EM benefits strongly from good initialization.
+MAPSO is reliable for m_c ≤ 3 (≥0.80) but drops sharply at m_c ≥ 4, reaching 0.00 at
+m_c = 5 for N_train ∈ {20, 25}. SGD drops from 0.68 at m_c = 1 to 0.00 for all m_c ≥ 2.
+EM declines from 0.90 at m_c = 1 to 0.00 at m_c = 5, N_train = 20, but recovers to 0.74
+at m_c = 6, N_train = 50 with a warm start, suggesting EM benefits strongly from good
+initialization.
