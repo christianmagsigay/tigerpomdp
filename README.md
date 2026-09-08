@@ -14,6 +14,8 @@ information, making them well-suited to partially observable environments.
 
 ## Visualizations
 
+![cover](Tiger_POMDP.jpg)
+
 [https://canva.link/ntyixpf0yixi82t](https://canva.link/ri79lyqszonnfqt)
 
 ## Methods compared
