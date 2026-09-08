@@ -37,7 +37,7 @@ generalization via a held-out validation split (train vs. val NLL).
 
 ## What's in the notebook
 
-The main notebook (`Tiger_POMDP__MAPSO__EM__SGD.ipynb`) walks through:
+The main notebook (`Tiger_POMDP.ipynb`) walks through:
 
 1. Ground-truth agent and dataset generation
 2. Optimizer hyperparameters
@@ -93,6 +93,3 @@ Key parameters to adjust at the top of the dataset-generation cell:
 - `n_data` — training set size (episodes)
 - `n_particles`, `n_iterations`, `n_restarts` — shared optimizer budget
 
-## Status
-
-Findings from this benchmarking pipeline are being prepared for a paper.
