@@ -108,13 +108,7 @@ achievable — but the path there is uneven.
 
 ![Policy Graph](policy_graph_mc5_n25.png)
 
-Figure 1: Performance of hybrid optimization and policy alignment. Final Negative Log-Likelihood
-(NLL) as a function of the number of MAPSO iterations before handoff to a local optimizer. Handoff
-iterations were geometrically sampled, with greater density early in optimization. Each point represents a
-warm-start trial in which MAPSO (blue circles) initialized either Expectation-Maximization (EM, orange
-squares) or Stochastic Gradient Descent (SGD, green triangles). Filled markers indicate convergence to
-the optimal Bayesian policy; open markers indicate a policy mismatch. Markers are slightly offset along
-the x-axis (MAPSO: left, EM: center, SGD: right) for clarity.
+Figure 1: Comparison of optimization methods for mc = 5, N=25. Each panel shows the learned policy of each algorithm and the corresponding optimal Bayesian policy (ground truth).
 
 
 MAPSO reaches NLL = 2.2×10⁻² and EM reaches a near-machine-precision 4.6×10⁻¹³. Despite MAPSO reaching near-zero NLL, it was not able to recover the Bayesian-optimal policy, only EM. Cold-start SGD fails consistent with its near-zero reliability at mc≥2 across the board.
@@ -123,7 +117,14 @@ MAPSO reaches NLL = 2.2×10⁻² and EM reaches a near-machine-precision 4.6×10
 ## Hybrid handoff behavior
 
 ![Policy Test](hybrid_mc5_n25_policytest.png)
-Figure 2: Comparison of optimization methods for mc = 5, N=25. Each panel shows the learned policy of each algorithm and the corresponding optimal Bayesian policy (ground truth).
+Figure 2:  Performance of hybrid optimization and policy alignment. Final Negative Log-Likelihood
+(NLL) as a function of the number of MAPSO iterations before handoff to a local optimizer. Handoff
+iterations were geometrically sampled, with greater density early in optimization. Each point represents a
+warm-start trial in which MAPSO (blue circles) initialized either Expectation-Maximization (EM, orange
+squares) or Stochastic Gradient Descent (SGD, green triangles). Filled markers indicate convergence to
+the optimal Bayesian policy; open markers indicate a policy mismatch. Markers are slightly offset along
+the x-axis (MAPSO: left, EM: center, SGD: right) for clarity.
+
 
 
 This is where the "lucky" improvements over plain MAPSO show up most clearly. The
